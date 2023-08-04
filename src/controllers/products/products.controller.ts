@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 @Controller('products')
 export class ProductsController {
@@ -8,7 +8,7 @@ export class ProductsController {
     @Query('offset') offset = 0,
     @Query('brand') brand = 'Laptop',
   ) {
-    return `Brand=>${brand},Limit=> ${limit}, Offset=> ${offset}`;
+    return { message: `Brand=>${brand},Limit=> ${limit}, Offset=> ${offset}` };
   }
   /**
    * Colocar las rutas estáticas al principio
@@ -16,10 +16,17 @@ export class ProductsController {
    */
   @Get('/filter')
   filter() {
-    return `Product filter`;
+    return { message: `Product filter` };
   }
   @Get('/:id')
   findOne(@Param('id') id: string) {
     return `Product id: ${id}`;
+  }
+  @Post('/')
+  create(@Body() payload: any) {
+    return {
+      message: 'create',
+      payload,
+    };
   }
 }
