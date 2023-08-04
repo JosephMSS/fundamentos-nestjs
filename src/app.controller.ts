@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -17,8 +17,24 @@ export class AppController {
   newWithSlash() {
     return 'new Endpoint with slash';
   }
+  @Get('products')
+  findAll(
+    @Query('limit') limit = 1,
+    @Query('offset') offset = 0,
+    @Query('brand') brand = 'Laptop',
+  ) {
+    return `Brand=>${brand},Limit=> ${limit}, Offset=> ${offset}`;
+  }
+  /**
+   * Colocar las rutas estáticas al principio
+   * @returns string
+   */
+  @Get('products/filter')
+  filter() {
+    return `Product filter`;
+  }
   @Get('products/:id')
-  task(@Param('id') id: string) {
+  findOne(@Param('id') id: string) {
     return `Product id: ${id}`;
   }
   @Get('categories/:id/products/:productId')
