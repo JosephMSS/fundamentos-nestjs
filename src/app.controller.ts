@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -16,5 +16,13 @@ export class AppController {
   @Get('/new-with-slash')
   newWithSlash() {
     return 'new Endpoint with slash';
+  }
+  @Get('products/:id')
+  task(@Param('id') id: string) {
+    return `Product id: ${id}`;
+  }
+  @Get('categories/:id/products/:productId')
+  categories(@Param('id') id: string, @Param('productId') productId: string) {
+    return ` Category : ${id}, Product id: ${productId}`;
   }
 }
