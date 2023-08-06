@@ -6,13 +6,13 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Post,
   Put,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
+import { ParseIntPipe as CustomIntPipe } from 'src/common/parse-int/parse-int.pipe';
 import { ProductsService } from 'src/services';
-
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -34,7 +34,7 @@ export class ProductsController {
   }
   @Get('/:id')
   @HttpCode(HttpStatus.FOUND)
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', CustomIntPipe) id: number) {
     console.log(typeof id);
 
     return this.productsService.finOne(id);
