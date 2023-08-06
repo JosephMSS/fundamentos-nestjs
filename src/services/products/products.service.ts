@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Product } from './entities';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class ProductsService {
@@ -29,7 +30,11 @@ export class ProductsService {
     return this.products;
   }
   finOne(id: number) {
-    return this.products.find((p) => p.id === id);
+    const product = this.products.find((p) => p.id === id);
+    if (!product) {
+      throw new NotFoundException(`Product ${id} not found`);
+    }
+    return product;
   }
   create(payload: any) {
     const newProduct = {
