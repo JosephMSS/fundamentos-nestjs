@@ -28,7 +28,7 @@ export class ProductsService {
   findAll() {
     return this.products;
   }
-  finOne({ id }) {
+  finOne(id: number) {
     return this.products.find((p) => p.id === id);
   }
   create(payload: any) {
@@ -38,5 +38,28 @@ export class ProductsService {
     };
     this.products.push(newProduct);
     return newProduct;
+  }
+  update(payload: any, id: number) {
+    const product = this.finOne(id);
+
+    if (!product) {
+      return null;
+    }
+    const productIndex = this.products.findIndex((p) => p.id === product.id);
+    const updatedProduct = {
+      ...product,
+      ...payload,
+    };
+    this.products[productIndex] = updatedProduct;
+    return updatedProduct;
+  }
+  delete(id: number) {
+    const product = this.finOne(id);
+    if (!product) {
+      return null;
+    }
+    const productIndex = this.products.findIndex((p) => p.id === product.id);
+    this.products.splice(productIndex, 1);
+    return this.products;
   }
 }

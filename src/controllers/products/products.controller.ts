@@ -10,16 +10,18 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { ProductsService } from 'src/services';
 
 @Controller('products')
 export class ProductsController {
+  constructor(private productsService: ProductsService) {}
   @Get('/')
   findAll(
     @Query('limit') limit = 1,
     @Query('offset') offset = 0,
     @Query('brand') brand = 'Laptop',
   ) {
-    return { message: `Brand=>${brand},Limit=> ${limit}, Offset=> ${offset}` };
+    return this.productsService.findAll();
   }
   /**
    * Colocar las rutas estáticas al principio
@@ -30,26 +32,20 @@ export class ProductsController {
     return { message: `Product filter` };
   }
   @Get('/:id')
-  @HttpCode(HttpStatus.ACCEPTED)
+  @HttpCode(HttpStatus.FOUND)
   findOne(@Param('id') id: string) {
-    return `Product id: ${id}`;
+    return this.productsService.finOne(+id);
   }
   @Post('/')
   create(@Body() payload: any) {
-    return {
-      message: 'create',
-      payload,
-    };
+    return this.productsService.create(payload);
   }
   @Put('/:id')
   update(@Body() payload: any, @Param('id') id: string) {
-    return {
-      message: `update id:${id}`,
-      payload,
-    };
+    return this.productsService.update(payload, +id);
   }
   @Delete('/:id')
   delete(@Param('id') id: string) {
-    return { message: `delete id:${id}` };
+    return this.productsService.delete(+id);
   }
 }
