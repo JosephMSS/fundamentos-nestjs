@@ -6,7 +6,7 @@ import {
   IsString,
   IsUrl,
 } from 'class-validator';
-import { PartialType } from "@nestjs/mapped-types";
+import { PartialType } from '@nestjs/mapped-types';
 /**
  * Class validator nos permite crear las validaciones en timpo de ejecucion
  * ! se debe use el middleware ValidationPipe en el main
@@ -39,14 +39,5 @@ export class CreateProductDto {
   @IsUrl()
   readonly image: string;
 }
-/**
- * Me crea las mismas validaciones pero sin que sean obligatorias 
- */
-export class UpdateProductDto extends PartialType(CreateProductDto)
-// export class UpdateProductDto {
-//   readonly name?: string;
-//   readonly description?: string;
-//   readonly price?: number;
-//   readonly stock?: number;
-//   readonly image?: string;
-// }
+
+export class UpdateProductDto extends PartialType(CreateProductDto) {}
