@@ -1,19 +1,19 @@
 # Entities
-1. **Products:**
+1. **Products:**✅
    - Attributes:
      - Product ID
      - Product Name
      - Description
      - Price
      - Stock Quantity
-     - SKU (Stock Keeping Unit)
+     - Image
    - Relationships:
      - Belongs to a Category
      - Belongs to a Brand
      - Ordered by Customers
      - Reviewed by Users
 
-2. **Categories:**
+2. **Categories:**✅
    - Attributes:
      - Category ID
      - Category Name
@@ -22,7 +22,7 @@
      - Contains Products
      - Subcategory of another Category (if applicable)
 
-3. **Brands:**
+3. **Brands:**✅
    - Attributes:
      - Brand ID
      - Brand Name
@@ -30,7 +30,7 @@
    - Relationships:
      - Produces Products
 
-4. **Users:**
+4. **Users:** ✅
    - Attributes:
      - User ID
      - Username
