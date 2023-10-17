@@ -10,7 +10,7 @@ import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
-
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ProductsModule,
@@ -21,6 +21,10 @@ import { DatabaseModule } from './database/database.module';
     BrandsModule,
     HttpModule,
     DatabaseModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
   ],
   controllers: [AppController],
   providers: [
