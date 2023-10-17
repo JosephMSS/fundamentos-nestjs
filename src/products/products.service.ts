@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -23,7 +23,12 @@ export class ProductsService {
       image: 'https://i.imgur.com/U4iGx1j.jpeg',
     },
   ];
+  constructor(@Inject('API_KEY') private apiKey: string) {}
   create(createProductDto: CreateProductDto) {
+    console.log(
+      '🚀 ~ file: products.service.ts:29 ~ ProductsService ~ create ~ this.apiKey:',
+      this.apiKey,
+    );
     return 'This action adds a new product';
   }
 

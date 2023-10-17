@@ -9,7 +9,7 @@ import { CustomersModule } from './customers/customers.module';
 import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
-const API_KEY = '12345634';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -20,14 +20,12 @@ const API_KEY = '12345634';
     CategoriesModule,
     BrandsModule,
     HttpModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
-    {
-      provide: 'API_KEY',
-      useValue: API_KEY,
-    },
+
     {
       provide: 'TASKS',
       useFactory: async (httpService: HttpService) => {
