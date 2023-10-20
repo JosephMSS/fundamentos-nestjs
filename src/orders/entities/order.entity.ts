@@ -1,5 +1,5 @@
-import { Product } from '@/products';
-import { User } from '@/users';
+import { Product } from '@src/products';
+import { User } from '@src/users';
 
 export class Order {
   date: Date;
