@@ -6,7 +6,7 @@ import {
   IsString,
   IsUrl,
 } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 /**
  * Class validator nos permite crear las validaciones en timpo de ejecucion
  * ! se debe use el middleware ValidationPipe en el main
