@@ -17,4 +17,8 @@ export class AppController {
   newWithSlash() {
     return 'new Endpoint with slash';
   }
+  @Get('tasks')
+  async getTasks() {
+    return await this.appService.getTasks();
+  }
 }
