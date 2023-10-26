@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './entities/product.entity';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateProductDto, UpdateProductDto } from './dto';
+import { Product } from './entities';
 @Injectable()
 export class ProductsService {
   private products: Product[] = [
@@ -23,7 +23,10 @@ export class ProductsService {
       image: 'https://i.imgur.com/U4iGx1j.jpeg',
     },
   ];
-  constructor(@Inject('API_KEY') private apiKey: string) {}
+  constructor(
+    @Inject('API_KEY') private apiKey: string,
+    @InjectRepository(Product) private productRepository: Repository<Product>,
+  ) {}
   create(createProductDto: CreateProductDto) {
     console.log(
       '🚀 ~ file: products.service.ts:29 ~ ProductsService ~ create ~ this.apiKey:',
@@ -32,8 +35,8 @@ export class ProductsService {
     return 'This action adds a new product';
   }
 
-  findAll() {
-    return this.products;
+  async findAll() {
+    return await this.productRepository.find();
   }
 
   findOne(id: number) {
