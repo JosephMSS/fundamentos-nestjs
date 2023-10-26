@@ -29,6 +29,7 @@ export class Product {
   stock: number;
   @Column({
     type: 'varchar',
+    nullable: true,
   })
   image: string;
 }
