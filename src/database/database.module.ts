@@ -22,7 +22,8 @@ const API_KEY = '12345634';
           username: user,
           password,
           database: db,
-          synchronize: false,
+          synchronize: true,
+          autoLoadEntities: true,
         };
       },
       inject: [config.KEY],
