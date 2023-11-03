@@ -4,6 +4,7 @@ import { config } from '@src/config';
 import { Client } from 'pg';
 import { DATABASE_PROVIDERS } from './database.enum';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Product } from '@src/products';
 const API_KEY = '12345634';
 /**
  * When a module is global, it can be imported by any other module in the application.
@@ -22,8 +23,8 @@ const API_KEY = '12345634';
           username: user,
           password,
           database: db,
-          synchronize: true,
-          autoLoadEntities: true,
+          synchronize: false,
+          entities: [Product],
         };
       },
       inject: [config.KEY],
