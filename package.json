@@ -6,6 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "typeorm": "typeorm-ts-node-esm -d src/database/data-source.ts",
+    "migrations:generate": "npm run typeorm -- migration:generate ",
+    "migrations:run": "npm run typeorm -- migration:run",
+    "migrations:show": "npm run typeorm -- migration:show",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "cross-env NODE_ENV=stag nest start",
@@ -31,6 +35,7 @@
     "axios": "^1.5.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "dotenv": "^16.3.1",
     "joi": "^17.11.0",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
