@@ -1,6 +1,7 @@
 import { registerAs } from '@nestjs/config';
-
-export default registerAs('config', () => ({
+import * as dotenv from 'dotenv';
+dotenv.config();
+export const config = {
   database: {
     postgres: {
       password: process.env.POSTGRES_PASSWORD,
@@ -11,4 +12,5 @@ export default registerAs('config', () => ({
       url: process.env.POSTGRES_DB_URL,
     },
   },
-}));
+};
+export default registerAs('config', () => config);
