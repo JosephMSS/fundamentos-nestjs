@@ -4,8 +4,11 @@ import {
   Entity,
   PrimaryColumn,
   UpdateDateColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Roles } from '../enums';
+import { Customer } from '../../customers/entities';
 @Entity()
 export class User {
   @PrimaryColumn()
@@ -22,7 +25,7 @@ export class User {
     length: 255,
     nullable: false,
   })
-  password: string;
+  password: string; //TODO: encrypt password
   @Column({
     type: 'varchar',
     length: 255,
@@ -42,4 +45,7 @@ export class User {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+  @OneToOne(() => Customer, (customer) => customer.user, { nullable: true })
+  @JoinColumn() // la que carga con la relación es la que debe tener el join column
+  customer: Customer;
 }
