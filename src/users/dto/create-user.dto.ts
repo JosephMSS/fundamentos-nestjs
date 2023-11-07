@@ -6,6 +6,8 @@ import {
   IsString,
   Min,
   MinLength,
+  IsPositive,
+  IsOptional,
 } from 'class-validator';
 //create a enum whit admin role
 export enum Role {
@@ -15,11 +17,18 @@ export enum Role {
 export class CreateUserDto {
   @IsEmail()
   @ApiProperty({ description: 'email description' })
-  email: string;
+  readonly email: string;
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   @MinLength(8)
-  password: string;
+  readonly password: string;
+  @ApiProperty()
   @IsEnum(Role)
-  role: string;
+  readonly role: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsPositive()
+  readonly customerId: string;
 }

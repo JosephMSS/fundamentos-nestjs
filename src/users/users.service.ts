@@ -1,27 +1,32 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CustomersService } from '@src/customers';
+import { Order } from '@src/orders';
+import { ProductsService } from '@src/products';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities';
-import { Order } from '@src/orders';
-import { ProductsService } from '@src/products';
-import { ConfigService } from '@nestjs/config';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Customer } from '@src/customers';
 @Injectable()
 export class UsersService {
   constructor(
     private productsService: ProductsService,
     private configService: ConfigService,
+    private customersService: CustomersService,
     @InjectRepository(User) private usersRepository: Repository<User>,
-    @InjectRepository(Customer)
-    private customersRepository: Repository<Customer>,
   ) {}
   randomId() {
     return Math.floor(Math.random() * 999);
   }
   async create(createUserDto: CreateUserDto) {
     const newUser = this.usersRepository.create(createUserDto);
+    if (createUserDto.customerId) {
+      const customer = await this.customersService.findOne({
+        id: createUserDto.customerId,
+      });
+      newUser.customer = customer;
+    }
     return await this.usersRepository.save(newUser);
   }
 

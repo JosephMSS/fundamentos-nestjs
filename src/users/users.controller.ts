@@ -11,6 +11,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ParseIntPipe } from '@src/common/parse-int/parse-int.pipe';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
@@ -18,7 +19,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Create user' })
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    return  await this.usersService.create(createUserDto);
+    return await this.usersService.create(createUserDto);
   }
 
   @Get()
@@ -27,8 +28,8 @@ export class UsersController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.usersService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: string) {
+    return await this.usersService.findOne({ id });
   }
   @Get(':id/orders')
   findOrders(@Param('id') id: string) {
