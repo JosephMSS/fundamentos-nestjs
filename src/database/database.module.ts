@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from '@src/products';
 import { User } from '@src/users';
 import { Customer } from '@src/customers';
+import { Brand } from '@src/brands/entities';
 const API_KEY = '12345634';
 /**
  * When a module is global, it can be imported by any other module in the application.
@@ -26,7 +27,7 @@ const API_KEY = '12345634';
           password,
           database: db,
           synchronize: false,
-          entities: [Product, User, Customer],
+          entities: [Product, User, Customer, Brand],
         };
       },
       inject: [config.KEY],
