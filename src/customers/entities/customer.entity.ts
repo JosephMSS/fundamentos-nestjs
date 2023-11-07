@@ -1,15 +1,15 @@
-import { User } from '../../users/entities';
 import {
   Column,
   CreateDateColumn,
   Entity,
   OneToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { User } from '../../users/entities';
 @Entity()
 export class Customer {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: string;
   @Column({
     type: 'varchar',

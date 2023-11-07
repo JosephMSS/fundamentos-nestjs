@@ -6,12 +6,13 @@ import {
   UpdateDateColumn,
   OneToOne,
   JoinColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Roles } from '../enums';
 import { Customer } from '../../customers/entities';
 @Entity()
 export class User {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
   @Column({
     type: 'varchar',
