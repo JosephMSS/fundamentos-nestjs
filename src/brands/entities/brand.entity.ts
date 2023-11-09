@@ -1,7 +1,9 @@
+import { Product } from '../../products';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -35,4 +37,6 @@ export class Brand {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+  @OneToMany(() => Product, (product) => product.brand)
+  products: Product[];
 }
