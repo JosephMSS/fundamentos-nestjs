@@ -4,9 +4,9 @@ import { config } from '@src/config';
 import { Client } from 'pg';
 import { DATABASE_PROVIDERS } from './database.enum';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from '@src/products';
-import { User } from '@src/users';
-import { Customer } from '@src/customers';
+import { Product } from '@src/products/entities';
+import { User } from '@src/users/entities';
+import { Customer } from '@src/customers/entities';
 import { Brand } from '@src/brands/entities';
 const API_KEY = '12345634';
 /**
