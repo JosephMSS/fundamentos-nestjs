@@ -29,4 +29,8 @@ export class CreateProductDto {
   @ApiProperty({ example: 'https://i.imgur.com/U4iGx1j.jpeg' })
   @IsUrl()
   readonly image: string;
+  @ApiProperty({ example: 1 })
+  @IsNumber()
+  @IsPositive()
+  readonly brandId: number;
 }
