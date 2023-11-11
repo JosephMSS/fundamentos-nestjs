@@ -23,6 +23,7 @@ export class BrandsService {
   async findOne(query) {
     const brand = await this.brandRepository.findOne({
       where: query,
+      relations: ['products'],
     });
     if (!brand) {
       throw new NotFoundException('Brand not found');

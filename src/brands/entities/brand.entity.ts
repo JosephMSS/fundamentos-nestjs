@@ -1,4 +1,4 @@
-import { Product } from '../../products';
+import { Product } from '../../products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,
@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
-@Entity()
+export const BRAND_TABLE_NAME = 'brand';
+@Entity({ name: BRAND_TABLE_NAME })
 export class Brand {
   @PrimaryGeneratedColumn()
   id: string;
