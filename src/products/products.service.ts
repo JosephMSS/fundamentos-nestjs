@@ -1,11 +1,19 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { BrandsService } from '../brands';
 import { CreateProductDto, UpdateProductDto } from './dto';
 import { Product } from './entities';
 @Injectable()
 export class ProductsService {
   constructor(
+    @Inject(forwardRef(() => BrandsService))
+    private readonly brandService: BrandsService,
     @Inject('API_KEY') private apiKey: string,
     @InjectRepository(Product) private productRepository: Repository<Product>,
   ) {}
