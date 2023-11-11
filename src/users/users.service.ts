@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CustomersService } from '@src/customers';
-import { Order } from '@src/orders';
-import { ProductsService } from '@src/products';
+import { CustomersService } from '@src/customers/customers.service';
+import { Order } from '@src/orders/entities';
+import { ProductsService } from '@src/products/products.service';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
