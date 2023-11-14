@@ -1,8 +1,12 @@
+import { Category } from '../../categories/entities';
 import { Brand } from '../../brands/entities';
+
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -54,4 +58,7 @@ export class Product {
   updatedAt: Date;
   @ManyToOne(() => Brand, (brand) => brand.products)
   brand: Brand;
+  @ManyToMany(() => Category, (category) => category.products)
+  @JoinTable()
+  categories: Category[];
 }

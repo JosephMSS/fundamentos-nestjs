@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Product } from '../../products/entities';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 export const CATEGORY_TABLE_NAME = 'category';
 @Entity({ name: CATEGORY_TABLE_NAME })
 export class Category {
@@ -17,4 +18,6 @@ export class Category {
     nullable: false,
   })
   description: string;
+  @ManyToMany(() => Product, (product) => product.categories)
+  products: Product[];
 }
