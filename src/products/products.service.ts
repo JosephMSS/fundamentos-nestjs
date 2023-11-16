@@ -76,6 +76,25 @@ export class ProductsService {
     product.categories.push(category);
     return await this.productRepository.save(product);
   }
+  async deleteCategoryByProduct(productId: number, categoryId) {
+    const product = await this.productRepository.findOne({
+      where: { id: productId },
+      relations: ['categories'],
+    });
+    const category = await this.categoryRepository.findOneBy({
+      id: categoryId,
+    });
+    if (!product) {
+      throw new NotFoundException('Product not Found');
+    }
+    if (!category) {
+      throw new NotFoundException('Category not Found');
+    }
+    product.categories = product.categories.filter(
+      (category) => category.id !== categoryId,
+    );
+    return await this.productRepository.save(product);
+  }
   async remove(id: number) {
     await this.findOne({ id });
     return this.productRepository.delete(id);

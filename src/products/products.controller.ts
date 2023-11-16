@@ -47,6 +47,13 @@ export class ProductsController {
   ) {
     return await this.productsService.updateCategoryByProduct(id, categoryId);
   }
+  @Delete(':id/category/:categoryId')
+  async deleteCategory(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('categoryId', ParseIntPipe) categoryId: number,
+  ) {
+    return await this.productsService.deleteCategoryByProduct(id, categoryId);
+  }
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.productsService.remove(+id);
