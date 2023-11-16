@@ -11,7 +11,7 @@ export const BRAND_TABLE_NAME = 'brand';
 @Entity({ name: BRAND_TABLE_NAME })
 export class Brand {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
   @Column({
     type: 'varchar',
     length: 255,
