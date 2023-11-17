@@ -1,8 +1,14 @@
-import { Product } from '@src/products/entities';
-import { User } from '@src/users/entities';
-
+import { Customer } from '../../customers/entities';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+@Entity()
 export class Order {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column({
+    type: 'timestamptz',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   date: Date;
-  user: User;
-  products: Product[];
+  @ManyToOne(() => Customer, (customer) => customer.orders, { nullable: false })
+  customer: Customer;
 }
