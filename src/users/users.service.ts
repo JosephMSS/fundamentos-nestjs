@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomersService } from '@src/customers/customers.service';
-import { Order } from '@src/orders/entities';
+import { Order } from '@src/orders/entities/order.entity';
 import { ProductsService } from '@src/products/products.service';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -52,7 +52,7 @@ export class UsersService {
     this.usersRepository.merge(user, updateUserDto);
     this.usersRepository.save(user);
   }
-  async findOrdersByUser(id: number): Promise<Order[]> {
+  async findOrdersByUser(id: number) {
     const user = await this.findOne({ id });
     const products = await this.productsService.findAll();
     return [
