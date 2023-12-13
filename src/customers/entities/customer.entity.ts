@@ -8,11 +8,11 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../users/entities';
-import { Order } from '../../orders/entities';
+import { Order } from '../../orders/entities/order.entity';
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
   @Column({
     type: 'varchar',
     length: 255,
