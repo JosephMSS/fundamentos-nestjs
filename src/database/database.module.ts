@@ -9,6 +9,8 @@ import { User } from '@src/users/entities';
 import { Customer } from '@src/customers/entities';
 import { Brand } from '@src/brands/entities';
 import { Category } from '@src/categories/entities';
+import { Order } from '@src/orders/entities/order.entity';
+import { OrderItem } from '@src/orders/entities/order-item.entity';
 const API_KEY = '12345634';
 /**
  * When a module is global, it can be imported by any other module in the application.
@@ -28,7 +30,15 @@ const API_KEY = '12345634';
           password,
           database: db,
           synchronize: false,
-          entities: [Product, User, Customer, Brand, Category],
+          entities: [
+            Product,
+            User,
+            Customer,
+            Brand,
+            Category,
+            Order,
+            OrderItem,
+          ],
         };
       },
       inject: [config.KEY],
