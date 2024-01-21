@@ -10,7 +10,7 @@ import { Customer } from '@src/customers/entities';
 import { Brand } from '@src/brands/entities';
 import { Category } from '@src/categories/entities';
 import { Order } from '@src/orders/entities/order.entity';
-import { OrderItem } from '@src/orders/entities/order-item.entity';
+import { OrderItem } from '@src/order-item/entities/order-item.entity';
 const API_KEY = '12345634';
 /**
  * When a module is global, it can be imported by any other module in the application.
