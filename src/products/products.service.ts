@@ -5,7 +5,6 @@ import { Category } from '@src/categories/entities';
 import { In, Repository } from 'typeorm';
 import { CreateProductDto, UpdateProductDto } from './dto';
 import { Product } from './entities';
-import { throwError } from 'rxjs';
 @Injectable()
 export class ProductsService {
   constructor(
