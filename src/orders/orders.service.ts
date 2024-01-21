@@ -1,19 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Customer } from '@src/customers/entities';
+import { Repository } from 'typeorm';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
-import { Repository } from 'typeorm';
-import { OrderItem } from './entities/order-item.entity';
-import { NotFoundError } from 'rxjs';
-import { Customer } from '@src/customers/entities';
 
 @Injectable()
 export class OrdersService {
   constructor(
     @InjectRepository(Order) private orderRepository: Repository<Order>,
-    @InjectRepository(OrderItem)
-    private orderItemRepository: Repository<OrderItem>,
     @InjectRepository(Customer)
     private customerRepository: Repository<Customer>,
   ) {}
@@ -47,11 +43,22 @@ export class OrdersService {
     return order;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+  async update(id: number, updateOrderDto: UpdateOrderDto) {
+    const order = await this.findOne(id);
+    if (updateOrderDto.customerId) {
+      const customer = await this.customerRepository.findOneBy({
+        id: updateOrderDto.customerId,
+      });
+      if (!customer) {
+        throw new NotFoundException('Customer not found');
+      }
+      order.customer = customer;
+    }
+    return await this.orderRepository.save(order);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  async remove(id: number) {
+    await this.findOne(id);
+    return await this.orderRepository.delete(id);
   }
 }

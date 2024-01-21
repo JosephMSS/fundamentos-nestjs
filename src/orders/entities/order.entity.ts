@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { OrderItem } from './order-item.entity';
+import { OrderItem } from '../../order-item/entities/order-item.entity';
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn()
