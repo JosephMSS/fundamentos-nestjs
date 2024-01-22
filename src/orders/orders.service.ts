@@ -34,8 +34,9 @@ export class OrdersService {
   }
 
   findOne(id: number) {
-    const order = this.orderRepository.findOneBy({
-      id,
+    const order = this.orderRepository.findOne({
+      where: { id },
+      relations: ['items', 'items.product'],
     });
     if (!order) {
       throw new NotFoundException('Order not found');
