@@ -25,12 +25,15 @@ export class OrderItemService {
     const product = await this.productRepository.findOneBy({
       id: createOrderItemDto.productId,
     });
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+    //TODO: update the product quantity
     const orderItem = new OrderItem();
     orderItem.order = order;
     orderItem.product = product;
     orderItem.quantity = createOrderItemDto.quantity;
-
-    return 'This action adds a new orderItem';
+    return await this.orderItemRepository.save(orderItem);
   }
 
   findAll() {
@@ -41,7 +44,7 @@ export class OrderItemService {
     return `This action returns a #${id} orderItem`;
   }
 
-  update(id: number, updateOrderItemDto: UpdateOrderItemDto) {
+  update(id: number, _updateOrderItemDto: UpdateOrderItemDto) {
     return `This action updates a #${id} orderItem`;
   }
 

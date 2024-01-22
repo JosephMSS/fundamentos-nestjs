@@ -11,7 +11,7 @@ export class OrderItem {
     type: 'int',
     nullable: false,
   })
-  a: number;
+  quantity: number;
 
   @ManyToOne(() => Product)
   product: Product;

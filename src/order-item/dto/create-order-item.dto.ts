@@ -6,13 +6,14 @@ export class CreateOrderItemDto {
   @IsNotEmpty()
   @ApiProperty()
   readonly orderId: number;
-  @IsPositive()
-  @IsNotEmpty()
-  @ApiProperty()
-  readonly customerId: number;
 
   @IsPositive()
   @IsNotEmpty()
   @ApiProperty()
   readonly productId: number;
+
+  @IsPositive()
+  @IsNotEmpty()
+  @ApiProperty()
+  quantity: number;
 }
