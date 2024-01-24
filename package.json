@@ -5,6 +5,7 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "type": "commonjs",
   "scripts": {
     "typeorm": "typeorm-ts-node-esm -d src/database/data-source.ts",
     "migrations:generate": "npm run typeorm -- migration:generate ",
