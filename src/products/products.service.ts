@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BRAND_TABLE_NAME, Brand } from '@src/brands/entities';
 import { Category } from '@src/categories/entities';
 import { In, Repository } from 'typeorm';
-import { CreateProductDto, UpdateProductDto } from './dto';
+import { CreateProductDto, FilterProductDto, UpdateProductDto } from './dto';
 import { Product } from './entities';
 @Injectable()
 export class ProductsService {
@@ -32,8 +32,18 @@ export class ProductsService {
     return await this.productRepository.save(newProduct);
   }
 
-  async findAll() {
-    return await this.productRepository.find();
+  async findAll(params?: FilterProductDto) {
+    if (params) {
+      const { limit, offset } = params;
+      return await this.productRepository.find({
+        relations: ['brand'],
+        skip: offset,
+        take: limit,
+      });
+    }
+    return await this.productRepository.find({
+      relations: ['brand'],
+    });
   }
 
   async findOne(query) {

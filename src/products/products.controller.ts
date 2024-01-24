@@ -1,18 +1,20 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
   ParseIntPipe,
+  Patch,
+  Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { ProductsService } from './products.service';
+import { ApiTags } from '@nestjs/swagger';
+import { FilterProductDto } from './dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ProductsService } from './products.service';
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
@@ -24,8 +26,8 @@ export class ProductsController {
   }
 
   @Get()
-  async findAll() {
-    return await this.productsService.findAll();
+  async findAll(@Query() params: FilterProductDto) {
+    return await this.productsService.findAll(params);
   }
 
   @Get(':id')

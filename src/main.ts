@@ -17,7 +17,11 @@ async function bootstrap() {
    * algún typo i datos maliciosos estos no puedan ser admitidos
    */
   app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transformOptions: { enableImplicitConversion: true },
+    }),
   );
   await app.listen(3000);
 }
