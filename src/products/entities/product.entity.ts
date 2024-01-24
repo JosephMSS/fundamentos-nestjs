@@ -5,12 +5,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
   JoinTable,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+/**
+ * De esta manera indexamos columnas de manera conjunta
+ */
+// @Index(['price', 'stock'])
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
@@ -27,6 +32,7 @@ export class Product {
     nullable: false,
   })
   description: string;
+  @Index() // De esta manera indexamos columnas de manera individual
   @Column({
     type: 'decimal',
     precision: 10,
