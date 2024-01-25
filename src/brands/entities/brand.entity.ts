@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-export const BRAND_TABLE_NAME = 'brand';
+export const BRAND_TABLE_NAME = 'brands';
 @Entity({ name: BRAND_TABLE_NAME })
 export class Brand {
   @PrimaryGeneratedColumn()

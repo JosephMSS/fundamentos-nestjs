@@ -9,7 +9,9 @@ import {
 } from 'typeorm';
 import { Roles } from '../enums';
 import { Customer } from '../../customers/entities';
-@Entity()
+@Entity({
+  name: 'users',
+})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -46,6 +48,9 @@ export class User {
   })
   updatedAt: Date;
   @OneToOne(() => Customer, (customer) => customer.user, { nullable: true })
-  @JoinColumn() // la que carga con la relación es la que debe tener el join column
+  @JoinColumn({
+    name: 'customer_id',
+    referencedColumnName: 'id',
+  }) // la que carga con la relación es la que debe tener el join column
   customer: Customer;
 }

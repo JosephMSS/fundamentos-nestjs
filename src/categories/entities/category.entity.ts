@@ -1,6 +1,6 @@
 import { Product } from '../../products/entities';
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-export const CATEGORY_TABLE_NAME = 'category';
+export const CATEGORY_TABLE_NAME = 'categories';
 @Entity({ name: CATEGORY_TABLE_NAME })
 export class Category {
   @PrimaryGeneratedColumn()

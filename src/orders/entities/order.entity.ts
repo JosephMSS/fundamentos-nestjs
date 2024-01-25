@@ -2,12 +2,15 @@ import { Customer } from '../../customers/entities';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { OrderItem } from '../../order-item/entities/order-item.entity';
-@Entity()
+@Entity({
+  name: 'orders',
+})
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,6 +20,10 @@ export class Order {
   })
   date: Date;
   @ManyToOne(() => Customer, (customer) => customer.orders, { nullable: false })
+  @JoinColumn({
+    name: 'customer_id',
+    referencedColumnName: 'id',
+  })
   customer: Customer;
 
   @OneToMany(() => OrderItem, (item) => item.order)

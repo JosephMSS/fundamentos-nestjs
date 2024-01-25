@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -9,7 +10,7 @@ import {
 } from 'typeorm';
 import { User } from '../../users/entities';
 import { Order } from '../../orders/entities/order.entity';
-@Entity()
+@Entity({ name: 'customers' })
 export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
@@ -23,6 +24,7 @@ export class Customer {
     type: 'varchar',
     length: 255,
     nullable: false,
+    name: 'last_name',
   })
   lastName: string;
   @Column({
@@ -32,12 +34,14 @@ export class Customer {
   })
   phone: string;
   @CreateDateColumn({
+    name: 'created_at',
     type: 'timestamp',
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
   @UpdateDateColumn({
+    name: 'updated_at',
     type: 'timestamp',
     nullable: false,
     default: () => 'CURRENT_TIMESTAMP',
