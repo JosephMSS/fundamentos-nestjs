@@ -37,7 +37,9 @@ export class OrderItemService {
   }
 
   findAll() {
-    return `This action returns all orderItem`;
+    return this.orderItemRepository.find({
+      relations: ['order'],
+    });
   }
 
   findOne(id: number) {
@@ -48,7 +50,13 @@ export class OrderItemService {
     return `This action updates a #${id} orderItem`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} orderItem`;
+  async remove(id: number) {
+    const orderItem = await this.orderItemRepository.findOneBy({
+      id,
+    });
+    if (!orderItem) {
+      throw new NotFoundException('OrderItem not found');
+    }
+    return this.orderItemRepository.delete(orderItem);
   }
 }

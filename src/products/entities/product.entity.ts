@@ -13,6 +13,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 /**
  * De esta manera indexamos columnas de manera conjunta
  */
@@ -56,6 +57,7 @@ export class Product {
     name: 'created_at',
     default: () => 'CURRENT_TIMESTAMP',
   })
+  @Exclude()
   createdAt: Date;
   @UpdateDateColumn({
     type: 'timestamptz',
